@@ -1,0 +1,204 @@
+/* components/Sidebar.module.css */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 28px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.logoIcon {
+  font-size: 32px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-radius: 12px;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+
+.logoSubtext {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  background: #f9fafb;
+  color: #1a1a1a;
+  transform: translateX(4px);
+}
+
+.navItem.active {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #2563eb;
+}
+
+.navIcon {
+  font-size: 20px;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.navIndicator {
+  width: 4px;
+  height: 24px;
+  background: #2563eb;
+  border-radius: 4px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.version {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* Стилі для скроллбару в сайдбарі */
+.sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 72px;
+    padding: 16px 8px;
+  }
+  
+  .logoSection {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logoText,
+  .logoSubtext,
+  .navLabel,
+  .navIndicator,
+  .footer {
+    display: none;
+  }
+  
+  .navItem {
+    justify-content: center;
+    padding: 12px;
+  }
+  
+  .navIcon {
+    font-size: 24px;
+    width: auto;
+  }
+}
+
+/* components/Sidebar.module.css - додайте до існуючого файлу */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 72px; /* Відступ від хедера */
+  height: calc(100% - 72px);
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 28px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+}
+
+/* Для мобільних пристроїв */
+@media (max-width: 768px) {
+  .sidebar {
+    top: 64px;
+    height: calc(100% - 64px);
+    width: 72px;
+    padding: 16px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    display: none;
+  }
+}
