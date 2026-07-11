@@ -17,6 +17,29 @@
   height: 100vh;
   z-index: 9999;
   border-radius: 0;
+  background: #000;
+}
+
+/* На мобільних пристроях повноекранний режим */
+@media (max-width: 768px) {
+  .playerContainer.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    border-radius: 0;
+  }
+  
+  /* Додаткові стилі для iOS Safari */
+  .playerContainer.fullscreen video {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .videoWrapper {
@@ -31,6 +54,31 @@
   height: 100%;
   object-fit: contain;
   cursor: pointer;
+}
+
+/* Для мобільних пристроїв покращуємо тач-цілі */
+@media (max-width: 768px) {
+  .video {
+    cursor: default;
+  }
+  
+  .controls {
+    padding: 12px 12px 16px !important;
+  }
+  
+  .controlButton {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .progressBar {
+    height: 6px !important;
+    margin-bottom: 14px !important;
+  }
+  
+  .volumeSlider {
+    width: 50px !important;
+  }
 }
 
 .loadingOverlay {
@@ -72,8 +120,20 @@
   transition: opacity 0.3s ease;
 }
 
+/* На мобільних пристроях показуємо контроли завжди при взаємодії */
+@media (max-width: 768px) {
+  .controls {
+    opacity: 0.7;
+  }
+  
+  .controls:active {
+    opacity: 1;
+  }
+}
+
 .videoWrapper:hover .controls,
-.controls:focus-within {
+.controls:focus-within,
+.videoWrapper:focus .controls {
   opacity: 1;
 }
 
@@ -90,6 +150,13 @@
 
 .progressBar:hover {
   height: 6px;
+}
+
+/* На мобільних пристроях прогресс-бар завжди трохи більший */
+@media (max-width: 768px) {
+  .progressBar {
+    height: 6px;
+  }
 }
 
 .progressFill {
@@ -115,6 +182,15 @@
   opacity: 1;
 }
 
+/* На мобільних пристроях завжди показуємо ручку */
+@media (max-width: 768px) {
+  .progressHandle {
+    opacity: 1;
+    width: 16px;
+    height: 16px;
+  }
+}
+
 .controlsRow {
   display: flex;
   justify-content: space-between;
@@ -127,6 +203,18 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+/* На мобільних пристроях зменшуємо відступи */
+@media (max-width: 768px) {
+  .controlsRow {
+    gap: 8px;
+  }
+  
+  .leftControls,
+  .rightControls {
+    gap: 8px;
+  }
 }
 
 .controlButton {
@@ -147,6 +235,19 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
+/* На мобільних пристроях збільшуємо тач-цілі */
+@media (max-width: 768px) {
+  .controlButton {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .controlButton svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 .timeDisplay {
   color: #fff;
   font-size: 13px;
@@ -155,10 +256,24 @@
   min-width: 80px;
 }
 
+@media (max-width: 768px) {
+  .timeDisplay {
+    font-size: 12px;
+    min-width: 70px;
+  }
+}
+
 .volumeControl {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* На мобільних пристроях ховаємо регулятор гучності */
+@media (max-width: 480px) {
+  .volumeControl input[type="range"] {
+    display: none;
+  }
 }
 
 .volumeSlider {
@@ -208,44 +323,18 @@
   opacity: 1;
 }
 
-/* Адаптивність */
+/* На мобільних пристроях ховаємо назву відео */
 @media (max-width: 768px) {
-  .controls {
-    padding: 8px 12px;
-  }
-  
-  .controlButton {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .timeDisplay {
-    font-size: 11px;
-    min-width: 60px;
-  }
-  
-  .volumeSlider {
-    width: 40px;
-  }
-  
   .videoTitle {
-    font-size: 12px;
-    top: 12px;
-    left: 12px;
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
-  .volumeSlider {
-    width: 30px;
-  }
-  
-  .controlsRow {
-    gap: 6px;
-  }
-  
-  .leftControls,
-  .rightControls {
-    gap: 6px;
+/* Підтримка iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .playerContainer.fullscreen video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }

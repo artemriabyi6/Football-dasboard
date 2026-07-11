@@ -11,6 +11,14 @@ interface VideoViewerProps {
   autoPlay?: boolean;
 }
 
+// Розширюємо тип HTMLVideoElement для підтримки webkit
+declare global {
+  interface HTMLVideoElement {
+    webkitEnterFullscreen?: () => void;
+    webkitExitFullscreen?: () => void;
+  }
+}
+
 export default function VideoViewer({ 
   videoUrl, 
   videoName, 
@@ -25,8 +33,19 @@ export default function VideoViewer({
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Перевірка на мобільний пристрій
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -52,11 +71,17 @@ export default function VideoViewer({
     const handleWaiting = () => setIsLoading(true);
     const handleCanPlay = () => setIsLoading(false);
 
+    // Слухаємо зміни fullscreen
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('ended', handleEnded);
     video.addEventListener('waiting', handleWaiting);
     video.addEventListener('canplay', handleCanPlay);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
 
     if (autoPlay) {
       video.play().catch(() => {
@@ -70,6 +95,7 @@ export default function VideoViewer({
       video.removeEventListener('ended', handleEnded);
       video.removeEventListener('waiting', handleWaiting);
       video.removeEventListener('canplay', handleCanPlay);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, [autoPlay]);
 
@@ -115,16 +141,49 @@ export default function VideoViewer({
     setIsMuted(value === 0);
   };
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = async () => {
     const container = containerRef.current;
-    if (!container) return;
+    const video = videoRef.current;
+    if (!container || !video) return;
 
-    if (!document.fullscreenElement) {
-      container.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
+    try {
+      if (!document.fullscreenElement) {
+        // Для мобільних пристроїв - використовуємо video element для fullscreen
+        if (isMobile) {
+          // iOS Safari - використовуємо webkitEnterFullscreen
+          if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen();
+            setIsFullscreen(true);
+            return;
+          }
+        }
+        
+        // Стандартний fullscreen
+        await container.requestFullscreen();
+        setIsFullscreen(true);
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+          setIsFullscreen(false);
+        }
+      }
+    } catch (error) {
+      console.log('Fullscreen error:', error);
+      
+      // Fallback для мобільних: пробуємо через video element
+      if (isMobile && video) {
+        try {
+          if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen();
+            setIsFullscreen(true);
+          } else if (video.requestFullscreen) {
+            await video.requestFullscreen();
+            setIsFullscreen(true);
+          }
+        } catch (err) {
+          console.log('Fallback fullscreen error:', err);
+        }
+      }
     }
   };
 
@@ -136,7 +195,10 @@ export default function VideoViewer({
   };
 
   return (
-    <div className={`${styles.playerContainer} ${isFullscreen ? styles.fullscreen : ''}`} ref={containerRef}>
+    <div 
+      className={`${styles.playerContainer} ${isFullscreen ? styles.fullscreen : ''}`} 
+      ref={containerRef}
+    >
       <div className={styles.videoWrapper}>
         <video
           ref={videoRef}
@@ -144,6 +206,8 @@ export default function VideoViewer({
           src={videoUrl}
           onClick={togglePlay}
           playsInline
+          webkit-playsinline="true"
+          x-webkit-airplay="allow"
         />
         
         {isLoading && (
