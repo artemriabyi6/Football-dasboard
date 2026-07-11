@@ -1,10 +1,12 @@
+// app/theory/page.tsx
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
 import TheoryForm from '../../components/TheoryForm';
 import TheoryCard from '../../components/TheoryCard';
+import PlaylistManager from '@/components/PlaylistManager';
 import Header from '@/components/Header';
-import { Theory } from '@/types';
+import { Theory, Playlist, VideoFile } from '@/types';
 import { initialTheoryData } from '@/data/theoryData';
 import styles from './page.module.css';
 
@@ -16,6 +18,11 @@ export default function TheoryPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const itemsPerPage = 4;
 
+  // Стани для плейлистів
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [videos, setVideos] = useState<VideoFile[]>([]);
+
+  // Завантаження даних з localStorage
   useEffect(() => {
     const saved = localStorage.getItem('theories');
     if (saved) {
@@ -28,13 +35,50 @@ export default function TheoryPage() {
       setTheories(initialTheoryData);
       localStorage.setItem('theories', JSON.stringify(initialTheoryData));
     }
+
+    // Завантаження плейлистів
+    const savedPlaylists = localStorage.getItem('playlists');
+    if (savedPlaylists) {
+      try {
+        setPlaylists(JSON.parse(savedPlaylists));
+      } catch {
+        setPlaylists([]);
+      }
+    }
+
+    // Завантаження відео
+    const savedVideos = localStorage.getItem('videos');
+    if (savedVideos) {
+      try {
+        setVideos(JSON.parse(savedVideos));
+      } catch {
+        setVideos([]);
+      }
+    }
   }, []);
 
+  // Збереження даних
   useEffect(() => {
     if (theories.length > 0) {
       localStorage.setItem('theories', JSON.stringify(theories));
     }
   }, [theories]);
+
+  useEffect(() => {
+    if (playlists.length > 0) {
+      localStorage.setItem('playlists', JSON.stringify(playlists));
+    } else {
+      localStorage.removeItem('playlists');
+    }
+  }, [playlists]);
+
+  useEffect(() => {
+    if (videos.length > 0) {
+      localStorage.setItem('videos', JSON.stringify(videos));
+    } else {
+      localStorage.removeItem('videos');
+    }
+  }, [videos]);
 
   // Фільтрація за пошуком
   const filteredTheories = useMemo(() => {
@@ -58,6 +102,7 @@ export default function TheoryPage() {
     setCurrentPage(1);
   }, [searchQuery]);
 
+  // Функції для роботи з теоріями
   const addTheory = (theory: Omit<Theory, 'id' | 'createdAt'>) => {
     const newTheory: Theory = {
       ...theory,
@@ -95,8 +140,71 @@ export default function TheoryPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Функції для роботи з плейлистами
+  const addPlaylist = (name: string, description?: string) => {
+    const newPlaylist: Playlist = {
+      id: Date.now().toString(),
+      name,
+      description,
+      videoIds: [],
+      createdAt: new Date().toISOString(),
+    };
+    setPlaylists([...playlists, newPlaylist]);
+  };
+
+  const editPlaylist = (id: string, name: string, description?: string) => {
+    setPlaylists(playlists.map(p => 
+      p.id === id 
+        ? { ...p, name, description, updatedAt: new Date().toISOString() }
+        : p
+    ));
+  };
+
+  const deletePlaylist = (id: string) => {
+    if (confirm('Ви впевнені, що хочете видалити цей плейлист?')) {
+      setPlaylists(playlists.filter(p => p.id !== id));
+    }
+  };
+
+  const addVideoToPlaylist = (playlistId: string, videoId: string) => {
+    setPlaylists(playlists.map(p => 
+      p.id === playlistId && !p.videoIds.includes(videoId)
+        ? { ...p, videoIds: [...p.videoIds, videoId], updatedAt: new Date().toISOString() }
+        : p
+    ));
+  };
+
+  const removeVideoFromPlaylist = (playlistId: string, videoId: string) => {
+    setPlaylists(playlists.map(p => 
+      p.id === playlistId
+        ? { ...p, videoIds: p.videoIds.filter(id => id !== videoId), updatedAt: new Date().toISOString() }
+        : p
+    ));
+  };
+
+  const addVideo = (file: File) => {
+    const video: VideoFile = {
+      id: Date.now().toString(),
+      name: file.name,
+      url: URL.createObjectURL(file),
+      size: file.size,
+      uploadedAt: new Date().toISOString(),
+    };
+    setVideos([...videos, video]);
+  };
+
+  const deleteVideo = (videoId: string) => {
+    if (confirm('Ви впевнені, що хочете видалити це відео?')) {
+      setVideos(videos.filter(v => v.id !== videoId));
+      // Також видаляємо з плейлистів
+      setPlaylists(playlists.map(p => ({
+        ...p,
+        videoIds: p.videoIds.filter(id => id !== videoId)
+      })));
+    }
+  };
+
   return (
-    
     <div className={styles.container}>
       <Header />
       <div className={styles.header}>
@@ -207,6 +315,19 @@ export default function TheoryPage() {
           )}
         </>
       )}
+
+      {/* Плейлисти */}
+      <PlaylistManager
+        playlists={playlists}
+        videos={videos}
+        onAddPlaylist={addPlaylist}
+        onEditPlaylist={editPlaylist}
+        onDeletePlaylist={deletePlaylist}
+        onAddVideoToPlaylist={addVideoToPlaylist}
+        onRemoveVideoFromPlaylist={removeVideoFromPlaylist}
+        onAddVideo={addVideo}
+        onDeleteVideo={deleteVideo}
+      />
     </div>
   );
 }

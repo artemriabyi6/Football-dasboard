@@ -276,3 +276,34 @@
     font-size: 13px;
   }
 }
+
+/* app/theory/page.module.css - додайте в кінець файлу */
+
+/* Плейлисти секція */
+.playlistsSection {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 2px solid #f3f4f6;
+}
+
+/* Адаптивність для плейлистів */
+@media (max-width: 768px) {
+  .playlistsSection {
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .playlistsSection {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+}
+
+/* Темна тема */
+@media (prefers-color-scheme: dark) {
+  .playlistsSection {
+    border-color: #2d2d44;
+  }
+}

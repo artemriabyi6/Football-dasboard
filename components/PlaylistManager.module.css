@@ -1,0 +1,627 @@
+/* components/PlaylistManager.module.css */
+
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+  margin-top: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.addButton {
+  padding: 8px 20px;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Форма створення */
+.createForm {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #e5e7eb;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input {
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Завантаження відео */
+.uploadSection {
+  margin-bottom: 20px;
+}
+
+.uploadButton {
+  padding: 8px 20px;
+  background: #f3f4f6;
+  color: #4b5563;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.uploadButton:hover {
+  background: #e5e7eb;
+}
+
+.uploadArea {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+}
+
+.uploadArea.dragging {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.uploadContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.uploadIcon {
+  font-size: 48px;
+}
+
+.uploadContent p {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.uploadFileButton {
+  padding: 10px 24px;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.uploadFileButton:hover {
+  background: #1d4ed8;
+}
+
+/* Список плейлистів */
+.playlistsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.playlistCard {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #f3f4f6;
+}
+
+.playlistHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.playlistInfo {
+  flex: 1;
+}
+
+.playlistName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.playlistDescription {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.videoCount {
+  font-size: 12px;
+  color: #9ca3af;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.playlistActions {
+  display: flex;
+  gap: 4px;
+}
+
+.editPlaylistButton,
+.deletePlaylistButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  background: transparent;
+}
+
+.editPlaylistButton:hover {
+  background: #eff6ff;
+}
+
+.deletePlaylistButton:hover {
+  background: #fef2f2;
+}
+
+/* Редагування плейлиста */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.editInput {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.editActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Відео в плейлисті */
+.videoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.videoItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.videoItem:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.videoThumbnail {
+  width: 60px;
+  height: 45px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f3f4f6;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.videoThumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: #f3f4f6;
+}
+
+.videoDuration {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.videoInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.videoName {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.videoSize {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.removeVideoButton {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.removeVideoButton:hover {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.addVideoButton {
+  padding: 8px 16px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  background: transparent;
+  min-width: 140px;
+}
+
+.addVideoButton:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #f8faff;
+}
+
+/* Вибір відео */
+.videoSelector {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.availableVideos {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.availableVideos h5 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.noVideos {
+  color: #9ca3af;
+  font-size: 13px;
+  text-align: center;
+  padding: 12px 0;
+}
+
+.videoList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.videoSelectItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+  width: 100%;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.videoSelectItem:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+}
+
+.addVideoIcon {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Відео без плейлиста */
+.orphanVideos {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.orphanTitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.orphanGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.orphanVideo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.deleteVideoButton {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+}
+
+.deleteVideoButton:hover {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.emptySubtext {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .videoItem {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .videoGrid {
+    flex-direction: column;
+  }
+  
+  .playlistHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .playlistActions {
+    justify-content: flex-end;
+  }
+  
+  .uploadArea {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .videoSelector {
+    padding: 8px;
+  }
+}
+
+/* Темна тема */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .header {
+    border-color: #2d2d44;
+  }
+  
+  .title {
+    color: #e5e7eb;
+  }
+  
+  .playlistCard {
+    background: #22223b;
+    border-color: #2d2d44;
+  }
+  
+  .playlistName {
+    color: #e5e7eb;
+  }
+  
+  .playlistDescription {
+    color: #9ca3af;
+  }
+  
+  .videoItem {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .videoName {
+    color: #e5e7eb;
+  }
+  
+  .createForm {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .input {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+  
+  .uploadArea {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .uploadArea.dragging {
+    border-color: #2563eb;
+    background: #1a2a4a;
+  }
+  
+  .availableVideos {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .videoSelectItem {
+    background: #22223b;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+  
+  .videoSelectItem:hover {
+    background: #1a2a4a;
+  }
+  
+  .orphanVideo {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+  
+  .emptyState {
+    color: #9ca3af;
+  }
+}

@@ -66,3 +66,24 @@ export interface FocusSubGoal {
   focusAreaIds: string[]; // Які напрямки розвитку використовувати
   exerciseIds?: string[]; // ID конкретних вправ з exercises.ts
 }
+
+// types/index.ts
+export interface VideoFile {
+  id: string;
+  name: string;
+  url: string;
+  duration?: string;
+  thumbnail?: string;
+  size?: number;
+  uploadedAt: string;
+}
+
+export interface Playlist {
+  id: string;
+  name: string;
+  description?: string;
+  videoIds: string[];
+  createdAt: string;
+  updatedAt?: string;
+  coverImage?: string;
+}
