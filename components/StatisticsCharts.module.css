@@ -1,0 +1,384 @@
+/* components/StatisticsCharts.module.css */
+
+.container {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: #f9fafb;
+  border-radius: 16px;
+  border: 2px dashed #e5e7eb;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.statsOverview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #f3f4f6;
+  transition: all 0.2s ease;
+}
+
+.statCard:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.statIcon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.chartCard {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+  transition: all 0.2s ease;
+}
+
+.chartCard:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.chartTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.chartWrapper {
+  position: relative;
+  height: 280px;
+}
+
+.fullWidth .chartWrapper {
+  height: 320px;
+}
+
+/* Детальна таблиця */
+.detailsTable {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+}
+
+.tableTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 2px solid #f3f4f6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table tbody td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #1a1a1a;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.areaCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cellDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.progressBar {
+  width: 120px;
+  height: 8px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+/* Адаптивність */
+@media (max-width: 1024px) {
+  .statsOverview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .fullWidth {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .statsOverview {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .statCard {
+    padding: 16px;
+  }
+  
+  .statIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+  
+  .statValue {
+    font-size: 20px;
+  }
+  
+  .chartWrapper {
+    height: 220px;
+  }
+  
+  .fullWidth .chartWrapper {
+    height: 240px;
+  }
+  
+  .detailsTable {
+    padding: 16px;
+  }
+  
+  .table tbody td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+/* components/StatisticsCharts.module.css - додайте нові стилі */
+
+.topAreas {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.topAreasList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topAreaItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #f9fafb;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.topAreaItem:hover {
+  background: #f3f4f6;
+  transform: translateX(4px);
+}
+
+.topAreaRank {
+  font-size: 14px;
+  font-weight: 700;
+  color: #6b7280;
+  min-width: 24px;
+}
+
+.topAreaDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.topAreaName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.topAreaCount {
+  font-size: 13px;
+  color: #6b7280;
+  margin-right: 12px;
+}
+
+.topAreaBar {
+  flex: 1;
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 3px;
+  overflow: hidden;
+  max-width: 150px;
+}
+
+.topAreaFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* Мотиваційний блок */
+.motivationBlock {
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-radius: 16px;
+  border: 1px solid #bfdbfe;
+}
+
+.motivationContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.motivationEmoji {
+  font-size: 32px;
+}
+
+.motivationText h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 2px;
+}
+
+.motivationText p {
+  font-size: 14px;
+  color: #3b82f6;
+}
+
+/* Адаптивність для нових елементів */
+@media (max-width: 768px) {
+  .topAreaItem {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .topAreaBar {
+    max-width: 100px;
+    flex: 1 1 100%;
+  }
+  
+  .topAreaCount {
+    margin-right: 0;
+  }
+  
+  .motivationContent {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .topAreas {
+    padding: 16px;
+  }
+  
+  .topAreaItem {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .topAreaBar {
+    max-width: 80px;
+  }
+}

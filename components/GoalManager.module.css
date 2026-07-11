@@ -1,0 +1,887 @@
+/* components/GoalManager.module.css */
+
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addButton {
+  padding: 8px 20px;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.addButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Форма створення */
+.createForm {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input {
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cancelButton {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.saveButton {
+  padding: 8px 20px;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Попередження */
+.warning {
+  padding: 12px 16px;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  color: #92400e;
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Пустий стан */
+.emptyState {
+  text-align: center;
+  padding: 48px 20px;
+  color: #6b7280;
+}
+
+.emptyState p:first-child {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.emptySubtext {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Список цілей */
+.goalsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Картка цілі */
+.goalCard {
+  background: #f9fafb;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.goalCard:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.goalCard.completed {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.goalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.goalInfo {
+  flex: 1;
+  min-width: 150px;
+}
+
+.goalTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1a1a1a;
+  word-break: break-word;
+}
+
+.goalDescription {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.goalActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.goalStatus {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 14px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.goalCard.completed .goalStatus {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #16a34a;
+}
+
+.deleteGoalButton {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  background: transparent;
+}
+
+.deleteGoalButton:hover {
+  background: #fef2f2;
+}
+
+/* Мета-інформація */
+.goalMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+/* Прогрес-бар */
+.progressBar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.goalCard.completed .progressFill {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+/* Підцілі */
+.subGoals {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.subGoalsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.subGoalsTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.addSubGoalButton {
+  font-size: 13px;
+  color: #2563eb;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: #eff6ff;
+}
+
+.addSubGoalButton:hover {
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.noSubGoals {
+  color: #9ca3af;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Список підцілей */
+.subGoalsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Картка підцілі */
+.subGoal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.subGoal:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.subGoalCompleted {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.subGoalCompleted:hover {
+  border-color: #6ee7a0;
+}
+
+.subGoalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Заголовок підцілі */
+.subGoalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.subGoalTitleInput {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  flex: 1;
+  min-width: 120px;
+}
+
+.subGoalTitleInput:focus {
+  outline: none;
+  border-bottom: 2px solid #2563eb;
+}
+
+.subGoalBadge {
+  font-size: 13px;
+  font-weight: 500;
+  color: #16a34a;
+  padding: 2px 12px;
+  background: #dcfce7;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Опис підцілі */
+.subGoalDescriptionInput {
+  font-size: 13px;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  width: 100%;
+}
+
+.subGoalDescriptionInput:focus {
+  outline: none;
+  border-bottom: 1px solid #d1d5db;
+}
+
+/* Статистика підцілі */
+.subGoalStats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #6b7280;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.subGoalProgress {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.subGoalCompleted .subGoalProgress {
+  color: #22c55e;
+}
+
+/* Прогрес-бар підцілі */
+.subGoalBar {
+  height: 5px;
+  background: #f3f4f6;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.subGoalFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Вибір напрямків */
+.subGoalAreas {
+  margin-top: 4px;
+}
+
+.subGoalLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b5563;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.areaSelection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.areaSelectButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.areaSelectButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.areaSelectButton.selected {
+  border-color: currentColor;
+  background: #f0f7ff;
+}
+
+.areaDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.areaName {
+  font-size: 13px;
+}
+
+.checkmark {
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.noAreasWarning {
+  font-size: 13px;
+  color: #9ca3af;
+  padding: 8px 0;
+}
+
+.selectedCount {
+  font-size: 12px;
+  color: #6b7280;
+  display: block;
+  margin-top: 6px;
+}
+
+/* Управління підціллю */
+.subGoalControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.targetControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.targetControl label {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.subGoalTargetInput {
+  width: 60px;
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #ffffff;
+}
+
+.subGoalTargetInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.deleteSubGoalButton {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.deleteSubGoalButton:hover {
+  background: #fef2f2;
+}
+
+/* ============================================
+   АДАПТИВНІСТЬ
+   ============================================ */
+
+/* Планшети та малі екрани */
+@media (max-width: 992px) {
+  .container {
+    padding: 20px;
+  }
+
+  .goalCard {
+    padding: 16px;
+  }
+
+  .subGoal {
+    padding: 14px;
+  }
+}
+
+/* Мобільні пристрої */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 17px;
+    justify-content: center;
+  }
+
+  .addButton {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .goalHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .goalActions {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .goalMeta {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .subGoalHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .subGoalTitleInput {
+    font-size: 14px;
+  }
+
+  .subGoalBadge {
+    align-self: flex-start;
+  }
+
+  .subGoalStats {
+    font-size: 12px;
+  }
+
+  .areaSelection {
+    gap: 6px;
+  }
+
+  .areaSelectButton {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .subGoalControls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .targetControl {
+    flex-wrap: wrap;
+  }
+
+  .targetControl label {
+    font-size: 12px;
+  }
+
+  .subGoalTargetInput {
+    width: 50px;
+    font-size: 12px;
+  }
+
+  .createForm {
+    padding: 16px;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+
+  .formActions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Дуже малі екрани */
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .goalCard {
+    padding: 12px;
+  }
+
+  .goalTitle {
+    font-size: 15px;
+  }
+
+  .subGoal {
+    padding: 12px;
+  }
+
+  .subGoalTitleInput {
+    font-size: 13px;
+  }
+
+  .areaSelectButton {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .areaDot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .subGoalTargetInput {
+    width: 45px;
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+
+  .progressBar {
+    height: 6px;
+  }
+
+  .subGoalBar {
+    height: 4px;
+  }
+
+  .emptyState {
+    padding: 32px 16px;
+  }
+
+  .emptyState p:first-child {
+    font-size: 16px;
+  }
+}
+
+/* Підтримка темної теми (якщо буде) */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .goalCard {
+    background: #22223b;
+    border-color: #2d2d44;
+  }
+
+  .goalCard:hover {
+    border-color: #3d3d5c;
+  }
+
+  .goalCard.completed {
+    background: #1a2e1a;
+    border-color: #2d5c2d;
+  }
+
+  .subGoal {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .subGoalCompleted {
+    background: #1a2e1a;
+    border-color: #2d5c2d;
+  }
+
+  .goalTitle,
+  .subGoalTitleInput,
+  .subGoalDescriptionInput {
+    color: #e5e7eb;
+  }
+
+  .goalDescription,
+  .goalMeta,
+  .subGoalStats,
+  .subGoalLabel,
+  .targetControl label,
+  .selectedCount {
+    color: #9ca3af;
+  }
+
+  .input {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+
+  .input:focus {
+    border-color: #2563eb;
+  }
+
+  .createForm {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .warning {
+    background: #2d2a1a;
+    border-color: #5c4d2d;
+    color: #fcd34d;
+  }
+
+  .emptyState {
+    color: #9ca3af;
+  }
+
+  .emptySubtext {
+    color: #6b7280;
+  }
+
+  .subGoalTargetInput {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+
+  .addSubGoalButton {
+    background: #1a2a4a;
+  }
+
+  .areaSelectButton {
+    color: #9ca3af;
+  }
+
+  .areaSelectButton.selected {
+    background: #1a2a4a;
+  }
+
+  .subGoalProgress {
+    color: #60a5fa;
+  }
+
+  .subGoalCompleted .subGoalProgress {
+    color: #4ade80;
+  }
+
+  .goalCard.completed .goalStatus {
+    background: #1a3a1a;
+    border-color: #2d5c2d;
+    color: #4ade80;
+  }
+
+  .goalStatus {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .subGoalBadge {
+    background: #1a3a1a;
+    color: #4ade80;
+  }
+
+  .progressFill {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  }
+
+  .goalCard.completed .progressFill {
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+  }
+}

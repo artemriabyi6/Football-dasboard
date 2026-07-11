@@ -28,7 +28,7 @@ export default function Header() {
           <Link href="/" className={styles.navLink}>Головна</Link>
           <Link href="/" className={styles.navLink}>Тренування</Link>
           <Link href="/theory" className={styles.navLink}>Теорія</Link>
-          <a href="#" className={styles.navLink}>Контакти</a>
+          <Link href="/focus" className={styles.navLink}>Фокус</Link>
         </nav>
 
         <div className={styles.actions}>
@@ -64,7 +64,7 @@ export default function Header() {
         <Link href="/" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Головна</Link>
         <Link href="/" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Тренування</Link>
         <Link href="/theory" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Теорія</Link>
-        <a href="#" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Контакти</a>
+        <Link href="/focus" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Фокус</Link>
       </div>
     </header>
   );

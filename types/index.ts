@@ -31,3 +31,38 @@ export interface Theory {
   createdAt: string;
   updatedAt?: string;
 }
+
+export interface FocusArea {
+  id: string;
+  name: string;
+  color: string;
+  createdAt: string;
+}
+
+export interface FocusDay {
+  date: string; // Формат: YYYY-MM-DD
+  areaIds: string[]; // ID напрямків, які були в цей день
+}
+
+export interface FocusGoal {
+  id: string;
+  title: string;
+  description?: string;
+  targetDate: string;
+  createdAt: string;
+  completed: boolean;
+  completedAt?: string;
+  subGoals: FocusSubGoal[];
+}
+
+export interface FocusSubGoal {
+  id: string;
+  title: string; // Назва підцілі
+  description?: string; // Опис підцілі
+  targetSessions: number;
+  currentSessions: number;
+  completed: boolean;
+  completedAt?: string;
+  focusAreaIds: string[]; // Які напрямки розвитку використовувати
+  exerciseIds?: string[]; // ID конкретних вправ з exercises.ts
+}

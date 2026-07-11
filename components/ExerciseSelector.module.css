@@ -1,0 +1,156 @@
+/* components/ExerciseSelector.module.css */
+
+.container {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.count {
+  font-size: 13px;
+  color: #6b7280;
+  background: #ffffff;
+  padding: 2px 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #ffffff;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.categoryFilter {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.categoryFilter:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.noExercises {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.exerciseList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.exerciseList::-webkit-scrollbar {
+  width: 4px;
+}
+
+.exerciseList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.exerciseList::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.exerciseItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.exerciseItem:hover {
+  border-color: #e5e7eb;
+  transform: translateX(4px);
+}
+
+.exerciseItem.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.exerciseInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exerciseTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.exerciseCategory {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.exerciseMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exerciseDuration,
+.exerciseLevel {
+  font-size: 12px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.checkmark {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 16px;
+}

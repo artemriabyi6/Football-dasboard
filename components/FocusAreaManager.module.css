@@ -1,0 +1,386 @@
+/* components/FocusAreaManager.module.css */
+
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f3f4f6;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.count {
+  font-size: 14px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.areaItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.areaItem:hover {
+  background: #f3f4f6;
+}
+
+.areaInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.colorDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.areaName {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  word-break: break-word;
+}
+
+.areaActions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.editButton,
+.deleteButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  background: transparent;
+}
+
+.editButton:hover {
+  background: #eff6ff;
+}
+
+.deleteButton:hover {
+  background: #fef2f2;
+}
+
+.addButton {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.addButton:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #f8faff;
+}
+
+.addForm,
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.addInput,
+.editInput {
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.addInput:focus,
+.editInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.colorPicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.colorOption {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.colorOption:hover {
+  transform: scale(1.1);
+}
+
+.colorOption.selected {
+  border-color: #1a1a1a;
+  transform: scale(1.1);
+}
+
+.addActions,
+.editActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.saveButton,
+.cancelButton {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.saveButton {
+  background: #2563eb;
+  color: white;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.cancelButton:hover {
+  background: #e5e7eb;
+}
+
+/* ============================================
+   АДАПТИВНІСТЬ
+   ============================================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .areaItem {
+    padding: 10px 12px;
+  }
+
+  .areaName {
+    font-size: 14px;
+  }
+
+  .colorDot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .addForm,
+  .editForm {
+    gap: 8px;
+  }
+
+  .colorPicker {
+    gap: 6px;
+  }
+
+  .colorOption {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .count {
+    align-self: flex-start;
+    font-size: 12px;
+    padding: 2px 10px;
+  }
+
+  .areaItem {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
+
+  .areaInfo {
+    min-width: unset;
+  }
+
+  .areaActions {
+    justify-content: flex-end;
+  }
+
+  .addButton {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .addInput,
+  .editInput {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .saveButton,
+  .cancelButton {
+    font-size: 13px;
+    padding: 6px 14px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .addActions,
+  .editActions {
+    flex-direction: column;
+  }
+}
+
+/* Підтримка темної теми */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .header {
+    border-color: #2d2d44;
+  }
+
+  .title {
+    color: #e5e7eb;
+  }
+
+  .count {
+    background: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .areaItem {
+    background: #22223b;
+  }
+
+  .areaItem:hover {
+    background: #2d2d44;
+  }
+
+  .areaName {
+    color: #e5e7eb;
+  }
+
+  .addButton {
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .addButton:hover {
+    border-color: #2563eb;
+    color: #60a5fa;
+    background: #1a2a4a;
+  }
+
+  .addInput,
+  .editInput {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+
+  .addInput:focus,
+  .editInput:focus {
+    border-color: #2563eb;
+  }
+
+  .cancelButton {
+    background: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .cancelButton:hover {
+    background: #3d3d5c;
+  }
+
+  .editButton:hover {
+    background: #1a2a4a;
+  }
+
+  .deleteButton:hover {
+    background: #2a1a1a;
+  }
+}

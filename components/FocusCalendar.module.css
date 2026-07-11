@@ -1,0 +1,432 @@
+/* components/FocusCalendar.module.css */
+
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+}
+
+.calendar {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.navButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 20px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.navButton:hover {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+.monthTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+  padding: 8px 0;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  position: relative;
+  min-height: 50px;
+  padding: 4px;
+}
+
+.day:hover {
+  background: #f3f4f6;
+}
+
+.day.today {
+  background: #eff6ff;
+  border: 2px solid #2563eb;
+}
+
+.day.selected {
+  background: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.day.selected .dayNumber {
+  color: white;
+}
+
+.dayNumber {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  transition: color 0.2s ease;
+}
+
+.day.selected .dayNumber {
+  color: white;
+}
+
+.dayColors {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dayColorDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.emptyDay {
+  aspect-ratio: 1;
+  min-height: 50px;
+}
+
+.selectedDayInfo {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.selectedDate {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.selectedDayLabel {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.noAreas {
+  font-size: 14px;
+  color: #9ca3af;
+  text-align: center;
+  padding: 12px;
+}
+
+.areaToggleList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.areaToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.areaToggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.areaToggle.active {
+  border-color: currentColor;
+}
+
+.toggleDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.toggleName {
+  font-size: 13px;
+}
+
+.toggleCheck {
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ============================================
+   АДАПТИВНІСТЬ
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+
+  .day {
+    min-height: 45px;
+  }
+
+  .dayNumber {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .monthTitle {
+    font-size: 16px;
+  }
+
+  .weekDay {
+    font-size: 11px;
+    padding: 4px 0;
+  }
+
+  .day {
+    min-height: 40px;
+    border-radius: 8px;
+  }
+
+  .dayNumber {
+    font-size: 13px;
+  }
+
+  .dayColorDot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .selectedDayInfo {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .selectedDate {
+    font-size: 14px;
+  }
+
+  .areaToggle {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .toggleName {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .header {
+    margin-bottom: 12px;
+  }
+
+  .navButton {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .monthTitle {
+    font-size: 14px;
+  }
+
+  .weekDays {
+    gap: 2px;
+  }
+
+  .weekDay {
+    font-size: 10px;
+    padding: 4px 0;
+  }
+
+  .daysGrid {
+    gap: 2px;
+  }
+
+  .day {
+    min-height: 32px;
+    border-radius: 6px;
+    padding: 2px;
+  }
+
+  .dayNumber {
+    font-size: 11px;
+  }
+
+  .dayColorDot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .day.today {
+    border-width: 1.5px;
+  }
+
+  .emptyDay {
+    min-height: 32px;
+  }
+
+  .selectedDayInfo {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  .selectedDate {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .selectedDayLabel {
+    font-size: 12px;
+  }
+
+  .areaToggleList {
+    gap: 6px;
+  }
+
+  .areaToggle {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-width: 1.5px;
+    gap: 4px;
+  }
+
+  .toggleDot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .toggleName {
+    font-size: 11px;
+  }
+
+  .toggleCheck {
+    font-size: 11px;
+  }
+
+  .noAreas {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+/* Підтримка темної теми */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .header {
+    border-color: #2d2d44;
+  }
+
+  .monthTitle {
+    color: #e5e7eb;
+  }
+
+  .weekDay {
+    color: #6b7280;
+  }
+
+  .day:hover {
+    background: #2d2d44;
+  }
+
+  .day.today {
+    background: #1a2a4a;
+    border-color: #3b82f6;
+  }
+
+  .dayNumber {
+    color: #e5e7eb;
+  }
+
+  .selectedDayInfo {
+    border-color: #2d2d44;
+  }
+
+  .selectedDate {
+    color: #e5e7eb;
+  }
+
+  .selectedDayLabel {
+    color: #9ca3af;
+  }
+
+  .areaToggle {
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .areaToggle:hover {
+    background: #2d2d44;
+  }
+
+  .areaToggle.active {
+    border-color: currentColor;
+  }
+
+  .noAreas {
+    color: #6b7280;
+  }
+}
