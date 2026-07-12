@@ -1,4 +1,7 @@
+// app/layout.tsx
 import type { Metadata } from 'next';
+import Header from '@/components/Header';
+import { GoalsProvider } from '@/context/GoalsContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,7 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="uk">
-      <body>{children}</body>
+      <body>
+        <GoalsProvider>
+          <Header />
+          {children}
+        </GoalsProvider>
+      </body>
     </html>
   );
 }

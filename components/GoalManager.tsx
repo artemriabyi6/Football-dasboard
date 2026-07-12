@@ -1,18 +1,18 @@
 // components/GoalManager.tsx
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FocusGoal, FocusSubGoal, FocusArea, FocusDay } from '@/types';
+import { useGoals } from '@/context/GoalsContext';
 import styles from './GoalManager.module.css';
 
 interface GoalManagerProps {
   areas: FocusArea[];
   focusDays: FocusDay[];
-  onUpdate: (goals: FocusGoal[]) => void;
 }
 
-export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerProps) {
-  const [goals, setGoals] = useState<FocusGoal[]>([]);
+export default function GoalManager({ areas, focusDays }: GoalManagerProps) {
+  const { goals, addGoal, updateGoal, deleteGoal, setGoals } = useGoals();
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingSubGoalId, setEditingSubGoalId] = useState<string | null>(null);
   const [newGoal, setNewGoal] = useState<Partial<FocusGoal>>({
@@ -22,24 +22,7 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
     subGoals: [],
   });
   
-  // Refs для запобігання зацикленням
-  const isInitialMount = useRef(true);
-  const isUpdating = useRef(false);
-  const prevStateRef = useRef<string>('');
-
-  // Завантаження даних з localStorage (тільки при монтуванні)
-  useEffect(() => {
-    const saved = localStorage.getItem('focusGoalsData');
-    if (saved) {
-      try {
-        const parsedGoals = JSON.parse(saved);
-        setGoals(parsedGoals);
-        prevStateRef.current = JSON.stringify(parsedGoals);
-      } catch {
-        setGoals([]);
-      }
-    }
-  }, []);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   // Функція для підрахунку прогресу
   const calculateProgress = useCallback((goal: FocusGoal) => {
@@ -69,35 +52,13 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
     };
   }, [focusDays]);
 
-  // Оновлення прогресу (без зациклення)
+  // Оновлення прогресу
   useEffect(() => {
-    if (goals.length === 0 || focusDays.length === 0 || areas.length === 0) {
+    if (goals.length === 0 || focusDays.length === 0 || areas.length === 0 || isUpdating) {
       return;
     }
 
-    if (isUpdating.current) {
-      return;
-    }
-
-    const currentStateKey = JSON.stringify({
-      goals: goals.map(g => ({
-        id: g.id,
-        subGoals: g.subGoals.map(sg => ({
-          id: sg.id,
-          focusAreaIds: sg.focusAreaIds.sort(),
-          targetSessions: sg.targetSessions,
-          currentSessions: sg.currentSessions,
-          completed: sg.completed,
-        }))
-      })),
-      focusDays: focusDays.map(d => ({ date: d.date, areaIds: d.areaIds.sort() }))
-    });
-
-    if (prevStateRef.current === currentStateKey) {
-      return;
-    }
-
-    isUpdating.current = true;
+    setIsUpdating(true);
 
     try {
       const updatedGoals = goals.map(goal => calculateProgress(goal));
@@ -109,36 +70,15 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
 
       if (hasChanges) {
         setGoals(updatedGoals);
-        prevStateRef.current = currentStateKey;
       }
     } finally {
       setTimeout(() => {
-        isUpdating.current = false;
-      }, 50);
+        setIsUpdating(false);
+      }, 100);
     }
-  }, [focusDays, areas, goals, calculateProgress]);
+  }, [focusDays, areas, goals, calculateProgress, setGoals]);
 
-  // Збереження даних при зміні goals
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    
-    if (isUpdating.current) {
-      return;
-    }
-
-    if (goals.length > 0) {
-      localStorage.setItem('focusGoalsData', JSON.stringify(goals));
-      onUpdate(goals);
-    } else {
-      localStorage.removeItem('focusGoalsData');
-      onUpdate([]);
-    }
-  }, [goals, onUpdate]);
-
-  const createGoal = () => {
+  const handleCreateGoal = () => {
     if (!newGoal.title || !newGoal.targetDate) return;
 
     const goal: FocusGoal = {
@@ -151,7 +91,7 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
       subGoals: [],
     };
 
-    setGoals(prev => [...prev, goal]);
+    addGoal(goal);
     setNewGoal({ title: '', description: '', targetDate: '', subGoals: [] });
     setShowCreateForm(false);
   };
@@ -171,38 +111,34 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
       exerciseIds: [],
     };
 
-    setGoals(prev => prev.map(g => 
-      g.id === goalId 
-        ? { ...g, subGoals: [...g.subGoals, newSubGoal] }
-        : g
-    ));
+    const updatedGoal = {
+      ...goal,
+      subGoals: [...goal.subGoals, newSubGoal]
+    };
+    updateGoal(goalId, { subGoals: updatedGoal.subGoals });
   };
 
   const updateSubGoal = (goalId: string, subGoalId: string, updates: Partial<FocusSubGoal>) => {
-    setGoals(prev => prev.map(g => {
-      if (g.id !== goalId) return g;
-      return {
-        ...g,
-        subGoals: g.subGoals.map(sg => 
-          sg.id === subGoalId ? { ...sg, ...updates } : sg
-        ),
-      };
-    }));
+    const goal = goals.find(g => g.id === goalId);
+    if (!goal) return;
+
+    const updatedSubGoals = goal.subGoals.map(sg => 
+      sg.id === subGoalId ? { ...sg, ...updates } : sg
+    );
+    updateGoal(goalId, { subGoals: updatedSubGoals });
   };
 
   const deleteSubGoal = (goalId: string, subGoalId: string) => {
-    setGoals(prev => prev.map(g => {
-      if (g.id !== goalId) return g;
-      return {
-        ...g,
-        subGoals: g.subGoals.filter(sg => sg.id !== subGoalId),
-      };
-    }));
+    const goal = goals.find(g => g.id === goalId);
+    if (!goal) return;
+
+    const updatedSubGoals = goal.subGoals.filter(sg => sg.id !== subGoalId);
+    updateGoal(goalId, { subGoals: updatedSubGoals });
   };
 
-  const deleteGoal = (goalId: string) => {
+  const handleDeleteGoal = (goalId: string) => {
     if (!confirm('Ви впевнені, що хочете видалити цю ціль?')) return;
-    setGoals(prev => prev.filter(g => g.id !== goalId));
+    deleteGoal(goalId);
   };
 
   const getGoalProgress = (goal: FocusGoal) => {
@@ -221,7 +157,6 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
 
   const hasAreas = areas.length > 0;
 
-  // Функції для контролю кількості тренувань
   const handleTargetChange = (goalId: string, subGoalId: string, value: number) => {
     const newValue = Math.max(1, Math.min(100, value));
     updateSubGoal(goalId, subGoalId, { targetSessions: newValue });
@@ -275,7 +210,7 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
             </button>
             <button 
               className={styles.saveButton}
-              onClick={createGoal}
+              onClick={handleCreateGoal}
               disabled={!newGoal.title || !newGoal.targetDate}
             >
               Створити ціль
@@ -317,7 +252,7 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
                     </span>
                     <button 
                       className={styles.deleteGoalButton}
-                      onClick={() => deleteGoal(goal.id)}
+                      onClick={() => handleDeleteGoal(goal.id)}
                       aria-label="Видалити ціль"
                     >
                       🗑️
@@ -439,7 +374,6 @@ export default function GoalManager({ areas, focusDays, onUpdate }: GoalManagerP
                               )}
                             </div>
 
-                            {/* Оновлений контрол для кількості тренувань */}
                             <div className={styles.subGoalControls}>
                               <div className={styles.targetControl}>
                                 <label>Ціль тренувань:</label>

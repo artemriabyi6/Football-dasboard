@@ -1,8 +1,9 @@
 // app/focus/page.tsx
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { FocusArea, FocusDay, FocusGoal } from '@/types';
+import { useState, useEffect } from 'react';
+import { FocusArea, FocusDay } from '@/types';
+import { useGoals } from '@/context/GoalsContext';
 import FocusAreaManager from '@/components/FocusAreaManager';
 import FocusCalendar from '@/components/FocusCalendar';
 import StatisticsCharts from '@/components/StatisticsCharts';
@@ -10,12 +11,11 @@ import GoalManager from '@/components/GoalManager';
 import GoalVisualization from '@/components/GoalVisualization';
 import Footer from '@/components/Footer';
 import styles from './page.module.css';
-import Header from '@/components/Header';
 
 export default function FocusPage() {
   const [areas, setAreas] = useState<FocusArea[]>([]);
   const [focusDays, setFocusDays] = useState<FocusDay[]>([]);
-  const [goals, setGoals] = useState<FocusGoal[]>([]);
+  const { goals } = useGoals();
 
   // Завантаження даних з localStorage
   useEffect(() => {
@@ -78,7 +78,6 @@ export default function FocusPage() {
   const deleteArea = (id: string) => {
     if (!confirm(`Ви впевнені, що хочете видалити цей напрямок?`)) return;
     setAreas(areas.filter(a => a.id !== id));
-    // Видаляємо всі записи за цим напрямком
     setFocusDays(focusDays.map(day => ({
       ...day,
       areaIds: day.areaIds.filter(areaId => areaId !== id)
@@ -91,7 +90,6 @@ export default function FocusPage() {
     
     if (existingDay) {
       if (existingDay.areaIds.includes(areaId)) {
-        // Видалити напрямок з цього дня
         const newAreaIds = existingDay.areaIds.filter(id => id !== areaId);
         if (newAreaIds.length === 0) {
           setFocusDays(focusDays.filter(d => d.date !== date));
@@ -101,30 +99,21 @@ export default function FocusPage() {
           ));
         }
       } else {
-        // Додати напрямок до цього дня
         setFocusDays(focusDays.map(d => 
           d.date === date ? { ...d, areaIds: [...d.areaIds, areaId] } : d
         ));
       }
     } else {
-      // Створити новий день
       setFocusDays([...focusDays, { date, areaIds: [areaId] }]);
     }
   };
 
-  // Оновлення цілей
- const handleGoalsUpdate = useCallback((updatedGoals: FocusGoal[]) => {
-    setGoals(updatedGoals);
-  }, []);
-
-  // Загальна статистика
   const totalSessions = focusDays.reduce((sum, day) => sum + day.areaIds.length, 0);
   const totalDays = focusDays.length;
 
   return (
     <>
       <div className={styles.container}>
-        <Header/>
         <div className={styles.header}>
           <div>
             <h1 className={styles.title}>🎯 Фокус</h1>
@@ -159,25 +148,21 @@ export default function FocusPage() {
           </div>
         )}
 
-        {/* Цілі та підцілі */}
         {areas.length > 0 && (
           <div className={styles.goalsSection}>
             <GoalManager 
               areas={areas} 
               focusDays={focusDays}
-              onUpdate={handleGoalsUpdate}
             />
           </div>
         )}
 
-        {/* Візуалізація цілей */}
         {goals.length > 0 && (
           <div className={styles.visualizationSection}>
             <GoalVisualization goals={goals} />
           </div>
         )}
 
-        {/* Статистика */}
         {areas.length > 0 && (
           <div className={styles.statsSection}>
             <StatisticsCharts areas={areas} focusDays={focusDays} />
