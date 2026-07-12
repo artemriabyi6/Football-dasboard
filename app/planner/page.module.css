@@ -1,0 +1,257 @@
+/* app/planner/page.module.css */
+
+.container {
+  min-height: 100vh;
+  background: #fafbfc;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 48px;
+  margin-top: 72px;
+  margin-left: 260px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #1a1a1a 0%, #4b5563 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.todayButton {
+  padding: 10px 20px;
+  background: #f3f4f6;
+  color: #4b5563;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.todayButton:hover {
+  background: #e5e7eb;
+}
+
+.addButton {
+  padding: 10px 24px;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.viewToggle {
+  display: flex;
+  gap: 4px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+  max-width: 200px;
+}
+
+.viewButton {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.viewButton:hover {
+  color: #1a1a1a;
+}
+
+.viewButton.active {
+  background: #ffffff;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.plannerContainer {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalContent {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Адаптивність */
+@media (max-width: 1024px) {
+  .content {
+    padding: 24px 32px;
+    margin-left: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px 16px;
+    margin-left: 72px;
+    margin-top: 64px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headerActions {
+    flex-direction: column;
+  }
+
+  .todayButton,
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modalContent {
+    max-width: 100%;
+    margin: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 16px 12px;
+    margin-left: 0;
+    margin-top: 60px;
+  }
+
+  .viewToggle {
+    max-width: 100%;
+  }
+
+  .viewButton {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+/* Темна тема */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #0f0f1a;
+  }
+
+  .plannerContainer {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .viewToggle {
+    background: #2d2d44;
+  }
+
+  .viewButton {
+    color: #9ca3af;
+  }
+
+  .viewButton:hover {
+    color: #e5e7eb;
+  }
+
+  .viewButton.active {
+    background: #1a1a2e;
+    color: #e5e7eb;
+  }
+
+  .modalContent {
+    background: #1a1a2e;
+  }
+
+  .todayButton {
+    background: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .todayButton:hover {
+    background: #3d3d5c;
+  }
+
+  .title {
+    background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    color: #9ca3af;
+  }
+}

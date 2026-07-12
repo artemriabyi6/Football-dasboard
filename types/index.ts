@@ -87,3 +87,23 @@ export interface Playlist {
   updatedAt?: string;
   coverImage?: string;
 }
+
+// types/index.ts
+export interface TrainingEvent {
+  id: string;
+  title: string;
+  description?: string;
+  startTime: string; // ISO datetime
+  endTime: string; // ISO datetime
+  areaId?: string; // ID напрямку з focus
+  type: 'training' | 'match' | 'rest' | 'other';
+  location?: string;
+  completed: boolean;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface DailyNote {
+  date: string; // YYYY-MM-DD
+  note: string;
+}

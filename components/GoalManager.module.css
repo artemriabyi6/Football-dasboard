@@ -885,3 +885,176 @@
     background: linear-gradient(90deg, #4ade80, #22c55e);
   }
 }
+
+/* components/GoalManager.module.css - додайте в кінець файлу */
+
+/* Покращені контроли для кількості тренувань */
+.targetControl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.targetControl label {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.targetInputGroup {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.targetInputGroup:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.targetAdjustButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #4b5563;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.targetAdjustButton:hover:not(:disabled) {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+.targetAdjustButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* На мобільних пристроях збільшуємо тач-цілі */
+@media (max-width: 768px) {
+  .targetAdjustButton {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .targetAdjustButton {
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+}
+
+.subGoalTargetInput {
+  width: 50px;
+  padding: 4px 2px;
+  border: none;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #1a1a1a;
+  background: #ffffff;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.subGoalTargetInput::-webkit-outer-spin-button,
+.subGoalTargetInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Для мобільних пристроїв робимо інпут більшим */
+@media (max-width: 768px) {
+  .subGoalTargetInput {
+    width: 60px;
+    padding: 8px 4px;
+    font-size: 16px;
+  }
+}
+
+.subGoalTargetInput:focus {
+  outline: none;
+}
+
+.targetRange {
+  font-size: 11px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+/* Покращення для всього контролу підцілі на мобільних */
+@media (max-width: 480px) {
+  .targetControl {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+  }
+  
+  .targetInputGroup {
+    width: 100%;
+  }
+  
+  .targetAdjustButton {
+    flex: 1;
+    max-width: 48px;
+  }
+  
+  .subGoalTargetInput {
+    flex: 1;
+    width: auto;
+  }
+}
+
+/* Темна тема */
+@media (prefers-color-scheme: dark) {
+  .targetInputGroup {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+  
+  .targetInputGroup:focus-within {
+    border-color: #2563eb;
+  }
+  
+  .targetAdjustButton {
+    color: #9ca3af;
+  }
+  
+  .targetAdjustButton:hover:not(:disabled) {
+    background: #2d2d44;
+    color: #e5e7eb;
+  }
+  
+  .subGoalTargetInput {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e5e7eb;
+  }
+  
+  .targetRange {
+    color: #6b7280;
+  }
+  
+  .targetControl label {
+    color: #9ca3af;
+  }
+}

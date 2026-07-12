@@ -1,0 +1,392 @@
+/* components/planner/PlannerDay.module.css */
+
+.container {
+  padding: 24px;
+}
+
+.header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.todayBadge {
+  font-size: 12px;
+  font-weight: 500;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.emptySubtext {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.emptyButton {
+  padding: 10px 24px;
+  background: #2563eb;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.emptyButton:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eventCard {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border-left: 4px solid #6b7280;
+  transition: all 0.2s ease;
+}
+
+.eventCard:hover {
+  background: #f3f4f6;
+  transform: translateX(4px);
+}
+
+.eventTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+  padding-right: 16px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.eventStartTime {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.eventEndTime {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.eventDuration {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  background: #f3f4f6;
+  padding: 1px 8px;
+  border-radius: 8px;
+}
+
+.eventContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.eventHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.eventTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eventTypeIcon {
+  font-size: 18px;
+}
+
+.eventTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.eventActions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.editButton,
+.deleteButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  background: transparent;
+}
+
+.editButton:hover {
+  background: #eff6ff;
+}
+
+.deleteButton:hover {
+  background: #fef2f2;
+}
+
+.eventDescription {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.eventMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.eventType {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6b7280;
+  background: #ffffff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.eventTypeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.eventArea {
+  font-size: 12px;
+  color: #6b7280;
+  background: #ffffff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.eventLocation {
+  font-size: 12px;
+  color: #6b7280;
+  background: #ffffff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.completedBadge {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 2px 12px;
+  border-radius: 12px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .eventCard {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .eventTime {
+    flex-direction: row;
+    gap: 12px;
+    min-width: unset;
+    padding-right: 0;
+    padding-bottom: 8px;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .eventStartTime {
+    font-size: 14px;
+  }
+
+  .eventDuration {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .date {
+    font-size: 17px;
+    flex-wrap: wrap;
+  }
+
+  .eventHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .eventActions {
+    justify-content: flex-end;
+  }
+
+  .eventTitle {
+    font-size: 14px;
+  }
+
+  .eventMeta {
+    gap: 8px;
+  }
+
+  .emptyState {
+    padding: 40px 16px;
+  }
+
+  .emptyIcon {
+    font-size: 36px;
+  }
+
+  .emptyTitle {
+    font-size: 16px;
+  }
+}
+
+/* Темна тема */
+@media (prefers-color-scheme: dark) {
+  .header {
+    border-color: #2d2d44;
+  }
+
+  .date {
+    color: #e5e7eb;
+  }
+
+  .todayBadge {
+    background: #1a2a4a;
+    color: #60a5fa;
+  }
+
+  .eventCard {
+    background: #22223b;
+  }
+
+  .eventCard:hover {
+    background: #2d2d44;
+  }
+
+  .eventTime {
+    border-color: #2d2d44;
+  }
+
+  .eventStartTime {
+    color: #e5e7eb;
+  }
+
+  .eventEndTime {
+    color: #9ca3af;
+  }
+
+  .eventDuration {
+    background: #2d2d44;
+    color: #6b7280;
+  }
+
+  .eventTitle {
+    color: #e5e7eb;
+  }
+
+  .eventDescription {
+    color: #9ca3af;
+  }
+
+  .eventType {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .eventArea {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .eventLocation {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .emptyTitle {
+    color: #e5e7eb;
+  }
+
+  .emptySubtext {
+    color: #9ca3af;
+  }
+
+  .editButton:hover {
+    background: #1a2a4a;
+  }
+
+  .deleteButton:hover {
+    background: #2a1a1a;
+  }
+}

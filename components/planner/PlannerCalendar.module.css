@@ -1,0 +1,278 @@
+/* components/planner/PlannerCalendar.module.css */
+
+.container {
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.navButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.navButton:hover {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+  padding: 8px 0;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  min-height: 60px;
+  position: relative;
+}
+
+.day:hover {
+  background: #f3f4f6;
+}
+
+.day.today {
+  background: #eff6ff;
+  border: 2px solid #2563eb;
+}
+
+.day.selected {
+  background: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.day.selected .dayNumber {
+  color: white;
+}
+
+.dayNumber {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  transition: color 0.2s ease;
+}
+
+.day.selected .dayNumber {
+  color: white;
+}
+
+.emptyDay {
+  aspect-ratio: 1;
+  min-height: 60px;
+}
+
+.dayEvents {
+  display: flex;
+  gap: 2px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dayEventDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.moreEvents {
+  font-size: 10px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f3f4f6;
+  flex-wrap: wrap;
+}
+
+.legendTitle {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.legendItems {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .day {
+    min-height: 50px;
+    padding: 4px 2px;
+  }
+
+  .dayNumber {
+    font-size: 12px;
+  }
+
+  .emptyDay {
+    min-height: 50px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .legend {
+    gap: 10px;
+  }
+
+  .legendItems {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .day {
+    min-height: 40px;
+    padding: 2px;
+    border-radius: 6px;
+  }
+
+  .dayNumber {
+    font-size: 11px;
+  }
+
+  .emptyDay {
+    min-height: 40px;
+  }
+
+  .weekDay {
+    font-size: 11px;
+    padding: 4px 0;
+  }
+
+  .dayEventDot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .moreEvents {
+    font-size: 8px;
+  }
+
+  .legendItem {
+    font-size: 11px;
+  }
+}
+
+/* Темна тема */
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: #e5e7eb;
+  }
+
+  .navButton:hover {
+    background: #2d2d44;
+    color: #e5e7eb;
+  }
+
+  .day:hover {
+    background: #2d2d44;
+  }
+
+  .day.today {
+    background: #1a2a4a;
+    border-color: #3b82f6;
+  }
+
+  .dayNumber {
+    color: #e5e7eb;
+  }
+
+  .weekDay {
+    color: #6b7280;
+  }
+
+  .legend {
+    border-color: #2d2d44;
+  }
+
+  .legendTitle {
+    color: #9ca3af;
+  }
+
+  .legendItem {
+    color: #9ca3af;
+  }
+
+  .moreEvents {
+    color: #9ca3af;
+  }
+}
