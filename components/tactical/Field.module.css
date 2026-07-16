@@ -1,0 +1,568 @@
+/* components/tactical/Field.module.css */
+
+.field {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/11;
+  background: #2d7d3d;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  touch-action: none;
+}
+
+.pitch {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Зовнішня рамка поля */
+.outline {
+  position: absolute;
+  inset: 2%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+}
+
+/* ВЕРТИКАЛЬНА центральна лінія (ділить поле на верхню/нижню половину) */
+.centerLine {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  width: 2px;
+  height: 96%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateX(-50%);
+}
+
+/* Центральне коло (по центру поля) */
+.centerCircle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18%;
+  padding-bottom: 18%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centerDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.5%;
+  height: 2.5%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Штрафний майданчик господарів (ліва сторона) */
+.penaltyAreaHome {
+  position: absolute;
+  left: 2%;
+  top: 50%;
+  width: 22%;
+  height: 38%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transform: translateY(-50%);
+  border-left: none;
+}
+
+/* Штрафний майданчик гостей (права сторона) */
+.penaltyAreaAway {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  width: 22%;
+  height: 38%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transform: translateY(-50%);
+  border-right: none;
+}
+
+/* Воротарський майданчик господарів (ліва сторона) */
+.goalAreaHome {
+  position: absolute;
+  left: 2%;
+  top: 50%;
+  width: 12%;
+  height: 18%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transform: translateY(-50%);
+  border-left: none;
+}
+
+/* Воротарський майданчик гостей (права сторона) */
+.goalAreaAway {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  width: 12%;
+  height: 18%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transform: translateY(-50%);
+  border-right: none;
+}
+
+/* Ворота господарів (ліва сторона) */
+.goalHome {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3%;
+  height: 12%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Ворота гостей (права сторона) */
+.goalAway {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 3%;
+  height: 12%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+}
+
+/* Кутові прапорці */
+.cornerTL {
+  position: absolute;
+  left: 2%;
+  top: 2%;
+  width: 5%;
+  height: 7%;
+  border-top: 2px solid rgba(255, 255, 255, 0.6);
+  border-left: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px 0 0 0;
+}
+
+.cornerTR {
+  position: absolute;
+  right: 2%;
+  top: 2%;
+  width: 5%;
+  height: 7%;
+  border-top: 2px solid rgba(255, 255, 255, 0.6);
+  border-right: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0 4px 0 0;
+}
+
+.cornerBL {
+  position: absolute;
+  left: 2%;
+  bottom: 2%;
+  width: 5%;
+  height: 7%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  border-left: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0 0 0 4px;
+}
+
+.cornerBR {
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  width: 5%;
+  height: 7%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  border-right: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0 0 4px 0;
+}
+
+/* Позначки для штрафних ударів */
+.penaltyMarkHome {
+  position: absolute;
+  left: 14%;
+  top: 50%;
+  width: 1.5%;
+  height: 2.5%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.penaltyMarkAway {
+  position: absolute;
+  right: 14%;
+  top: 50%;
+  width: 1.5%;
+  height: 2.5%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+/* Дуги для штрафних ударів */
+.penaltyArcHome {
+  position: absolute;
+  left: 19%;
+  top: 50%;
+  width: 6%;
+  height: 14%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  border-left: none;
+  border-right: none;
+}
+
+.penaltyArcAway {
+  position: absolute;
+  right: 19%;
+  top: 50%;
+  width: 6%;
+  height: 14%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  border-left: none;
+  border-right: none;
+}
+
+/* Назви команд на полі */
+.teamLabelHome {
+  position: absolute;
+  left: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(37, 99, 235, 0.3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.teamLabelAway {
+  position: absolute;
+  right: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(220, 38, 38, 0.3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Стрілки напрямку атаки */
+.attackArrowHome {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(37, 99, 235, 0.4);
+  font-size: 24px;
+  font-weight: 700;
+  pointer-events: none;
+  animation: pulseArrow 2s ease-in-out infinite;
+}
+
+.attackArrowAway {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(220, 38, 38, 0.4);
+  font-size: 24px;
+  font-weight: 700;
+  pointer-events: none;
+  animation: pulseArrow 2s ease-in-out infinite 0.5s;
+}
+
+@keyframes pulseArrow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* М'яч */
+.ball {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #e5e5e5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 5;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ball::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent);
+  border-radius: 50%;
+}
+
+.ball::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: 
+    linear-gradient(45deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 50%, transparent 50%, transparent 100%),
+    linear-gradient(-45deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.05) 50%, transparent 50%, transparent 100%);
+  border-radius: 50%;
+}
+
+/* Гравці */
+.player {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.player:active {
+  cursor: grabbing;
+}
+
+.player:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  z-index: 20;
+}
+
+.player.dragging {
+  z-index: 30;
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.player.selected {
+  z-index: 25;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 0 3px #fff, 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.player.home {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: 2px solid #fff;
+}
+
+.player.away {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  border: 2px solid #fff;
+}
+
+.playerNumber {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.playerPosition {
+  font-size: 8px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  margin-top: 1px;
+  pointer-events: none;
+}
+
+.playerControls {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.player.selected .playerControls {
+  opacity: 1;
+}
+
+/* Легенда */
+.legend {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 14px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  z-index: 40;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #fff;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+  .player {
+    width: 36px;
+    height: 36px;
+  }
+
+  .playerNumber {
+    font-size: 11px;
+  }
+
+  .playerPosition {
+    font-size: 7px;
+  }
+
+  .ball {
+    width: 16px;
+    height: 16px;
+  }
+
+  .legend {
+    bottom: 8px;
+    right: 8px;
+    padding: 4px 10px;
+    gap: 10px;
+    font-size: 9px;
+  }
+
+  .legendDot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .teamLabelHome,
+  .teamLabelAway {
+    font-size: 9px;
+  }
+
+  .attackArrowHome,
+  .attackArrowAway {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .player {
+    width: 30px;
+    height: 30px;
+  }
+
+  .playerNumber {
+    font-size: 9px;
+  }
+
+  .playerPosition {
+    display: none;
+  }
+
+  .playerControls {
+    display: none;
+  }
+
+  .field {
+    border-radius: 8px;
+  }
+
+  .outline {
+    inset: 1%;
+  }
+
+  .ball {
+    width: 14px;
+    height: 14px;
+  }
+
+  .teamLabelHome,
+  .teamLabelAway {
+    display: none;
+  }
+
+  .attackArrowHome,
+  .attackArrowAway {
+    font-size: 14px;
+  }
+
+  .legend {
+    bottom: 4px;
+    right: 4px;
+    padding: 2px 8px;
+    gap: 6px;
+    font-size: 7px;
+  }
+
+  .legendDot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* Додайте в кінець файлу Field.module.css */
+
+/* М'яч при перетягуванні */
+.ball.dragging {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.4);
+  z-index: 15;
+  transition: none;
+}
+
+/* Покращена видимість м'яча */
+.ball {
+  transition: all 0.1s ease;
+}
+
+.ball:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.3);
+}

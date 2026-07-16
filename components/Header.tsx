@@ -30,6 +30,7 @@ export default function Header() {
           <Link href="/theory" className={styles.navLink}>Теорія</Link>
           <Link href="/focus" className={styles.navLink}>Фокус</Link>
           <Link href="/planner" className={styles.navLink}>Планер</Link>
+          <Link href="/tactics" className={styles.navLink}>Тактика</Link>
 
         </nav>
 
@@ -68,6 +69,7 @@ export default function Header() {
         <Link href="/theory" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Теорія</Link>
         <Link href="/focus" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Фокус</Link>
         <Link href="/planner" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Планер</Link>
+        <Link href="/tactics" className={styles.mobileNavLink} onClick={() => setIsMobileMenuOpen(false)}>Тактика</Link>
       </div>
     </header>
   );
