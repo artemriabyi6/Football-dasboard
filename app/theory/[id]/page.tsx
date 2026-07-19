@@ -23,7 +23,6 @@ export default function TheoryDetailPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Отримуємо дані з localStorage
     const saved = localStorage.getItem('theories');
     if (saved) {
       try {
@@ -80,9 +79,6 @@ export default function TheoryDetailPage() {
           ← Назад до списку
         </Link>
         <div className={styles.headerActions}>
-          {/* <Link href={`/theory/${theory.id}/edit`} className={styles.editButton}>
-            ✏️ Редагувати
-          </Link> */}
         </div>
       </div>
 
@@ -115,6 +111,17 @@ export default function TheoryDetailPage() {
               );
             })}
           </div>
+
+          {/* Відображення аналізу власних дій */}
+          {theory.personalAnalysis && (
+            <div className={styles.personalAnalysisBlock}>
+              <div className={styles.personalAnalysisHeader}>
+                <span className={styles.personalAnalysisIcon}>👤</span>
+                <h3 className={styles.personalAnalysisTitle}>Аналіз власних дій</h3>
+              </div>
+              <p className={styles.personalAnalysisText}>{theory.personalAnalysis}</p>
+            </div>
+          )}
 
           <div className={styles.paperFooter}>
             <span>Створено: {formatDate(theory.createdAt)} о {formatTime(theory.createdAt)}</span>

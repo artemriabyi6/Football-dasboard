@@ -15,19 +15,21 @@ export interface Category {
   icon: string;
 }
 
+
 export interface Theory {
   id: string;
   title: string;
   match: string;
   date: string;
   questions: {
-    question1: string; // 0-10 min
-    question2: string; // 10-30 min
-    question3: string; // 30-45 min
-    question4: string; // 45-60 min
-    question5: string; // 60-75 min
-    question6: string; // 75-90 min
+    question1: string;
+    question2: string;
+    question3: string;
+    question4: string;
+    question5: string;
+    question6: string;
   };
+  personalAnalysis?: string; // Додаємо поле для аналізу власних дій
   createdAt: string;
   updatedAt?: string;
 }

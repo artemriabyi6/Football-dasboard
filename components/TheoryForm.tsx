@@ -1,3 +1,4 @@
+// components/TheoryForm.tsx
 'use client';
 
 import { useState } from 'react';
@@ -24,6 +25,7 @@ export default function TheoryForm({ onSubmit, initialData, onCancel }: TheoryFo
     title: initialData?.title || '',
     match: initialData?.match || '',
     date: initialData?.date || new Date().toISOString().split('T')[0],
+    personalAnalysis: initialData?.personalAnalysis || '',
     questions: {
       question1: initialData?.questions?.question1 || '',
       question2: initialData?.questions?.question2 || '',
@@ -99,6 +101,23 @@ export default function TheoryForm({ onSubmit, initialData, onCancel }: TheoryFo
             />
           </div>
         ))}
+
+        {/* Додаємо поле для аналізу власних дій */}
+        <div className={styles.personalAnalysisField}>
+          <div className={styles.personalAnalysisHeader}>
+            <span className={styles.personalAnalysisLabel}>👤 Аналіз власних дій</span>
+            <span className={styles.personalAnalysisDescription}>
+              Оцініть свої дії на полі, що вдалося, а над чим потрібно працювати
+            </span>
+          </div>
+          <textarea
+            value={formData.personalAnalysis}
+            onChange={(e) => setFormData({ ...formData, personalAnalysis: e.target.value })}
+            placeholder="Наприклад: Добре працював у відборі, але потрібно покращити перший дотик..."
+            rows={4}
+            className={styles.personalAnalysisTextarea}
+          />
+        </div>
       </div>
 
       <div className={styles.actions}>
